@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Sparkles, Shirt, Waves, SunMedium } from "lucide-react";
+
 import { Divider } from "./Divider";
 import { Reveal } from "./Reveal";
 
@@ -11,28 +11,7 @@ const palette = [
   { name: "Golden Glow", color: "bg-[#E0A96D]", border: "border-[#E0A96D]/40" },
 ];
 
-const highlights = [
-  {
-    icon: Sparkles,
-    title: "Vibrant Colours",
-    desc: "Think bright, joyful hues that scream celebration — corals, yellows, turquoise, sunset pinks.",
-  },
-  {
-    icon: Waves,
-    title: "Tropical Prints",
-    desc: "Florals, palm motifs, botanical botanicals, or breezy resort patterns.",
-  },
-  {
-    icon: Shirt,
-    title: "Stylish Casuals",
-    desc: "Relaxed linen shirts, playful sundresses, chic co-ord sets, party-ready fits.",
-  },
-  {
-    icon: SunMedium,
-    title: "Foam & Dance Ready",
-    desc: "Comfortable footwear & fits you won't mind getting wild and splashed in!",
-  },
-];
+
 
 export function DressCode() {
   return (
@@ -66,32 +45,7 @@ export function DressCode() {
           </div>
         </Reveal>
 
-        {/* Style Guide Cards */}
-        <Reveal delay={0.25}>
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-            {highlights.map((h) => {
-              const Icon = h.icon;
-              return (
-                <div
-                  key={h.title}
-                  className="grain flex items-start gap-4 rounded-xl border border-border/70 bg-paper-deep/40 p-5 shadow-xs"
-                >
-                  <div className="grid size-10 shrink-0 place-items-center rounded-full bg-gold/15 text-gold border border-gold/30">
-                    <Icon className="size-5" />
-                  </div>
-                  <div>
-                    <h3 className="caps text-[0.65rem] font-medium text-ink tracking-widest">
-                      {h.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-sepia">
-                      {h.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </Reveal>
+
 
         <Reveal delay={0.35}>
           <p className="caps mt-10 text-[0.55rem] text-olive/80 tracking-[0.25em]">

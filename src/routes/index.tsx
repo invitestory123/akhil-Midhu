@@ -11,7 +11,8 @@ import { Hero } from "@/components/invite/Hero";
 import { InviteFooter } from "@/components/invite/InviteFooter";
 import { MusicPlayer } from "@/components/invite/MusicPlayer";
 import { Note } from "@/components/invite/Note";
-import { OneLastThing } from "@/components/invite/OneLastThing";
+
+import { RSVP } from "@/components/invite/RSVP";
 import { ScrollThread } from "@/components/invite/ScrollThread";
 import { Venue } from "@/components/invite/Venue";
 import { invite } from "@/config/invite";
@@ -53,9 +54,10 @@ function Invitation() {
         <Note />
         <Experiences />
         <DressCode />
-        <OneLastThing />
+
         <Countdown />
         <Venue />
+        <RSVP />
         <AddToCalendar />
         <InviteFooter />
       </main>

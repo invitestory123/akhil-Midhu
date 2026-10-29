@@ -9,7 +9,7 @@ const experiences = [
   {
     tag: "01 · Sunset Prelude",
     title: "The Cocktail Hour",
-    time: "4:00 PM Onwards",
+    time: "7:00 PM Onwards",
     image: cocktailImg,
     alt: "Friends toasting colorful cocktails together under fairy lights",
     quote: "Raise a glass to friendship, celebrate new beginnings, and toast to the memories we've made and all the ones yet to come.",

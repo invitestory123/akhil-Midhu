@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, useTransform } from "motion/react";
 import { useCallback, useRef, useState } from "react";
-import coupleImg from "@/assets/couple-caricature.jpg";
+import coupleImg from "@/assets/couple.jpg";
 import { invite } from "@/config/invite";
 import { useParallax } from "@/hooks/use-parallax";
 import { getLenis } from "@/lib/lenis";
@@ -63,7 +63,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
           Forever Fest · Save The Date
         </span>
         <span className="rounded-full border border-gold/40 bg-gold/10 px-3 py-0.5 text-[0.52rem] caps text-olive">
-          Married 26.10.26 · Party 29.10.26
+          Married {invite.weddingDate} · Party {invite.dateLabel}
         </span>
       </motion.div>
 
@@ -77,10 +77,10 @@ export function Hero({ ready = true }: { ready?: boolean }) {
       </motion.p>
 
       <motion.div style={{ y, opacity: fade }} className="mt-7 w-full max-w-xs sm:max-w-sm">
-        <div className="relative mx-auto aspect-square overflow-hidden rounded-full border-2 border-gold/50 p-2 shadow-[0_20px_50px_-20px_rgba(60,45,25,0.45)] ring-8 ring-gold/10">
+        <div className="relative mx-auto aspect-square overflow-hidden rounded-full border-2 border-gold/50 p-2 shadow-[0_20px_50px_-20px_rgba(60,45,25,0.45)] ring-8 ring-gold/10 bg-paper-deep/30">
           <motion.img
             src={coupleImg}
-            alt={`Caricature illustration of ${invite.bride} and ${invite.groom} celebrating Forever Fest`}
+            alt={`Illustration of ${invite.bride} and ${invite.groom}`}
             width={1024}
             height={1024}
             draggable={false}

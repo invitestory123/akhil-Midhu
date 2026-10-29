@@ -23,7 +23,7 @@ export function Note() {
               &ldquo;Some people are part of our story. Some become the reason our story is beautiful.&rdquo;
             </p>
             <p>
-              Our wedding on <span className="font-semibold text-ink">26th October</span> was an intimate
+              Our wedding on <span className="font-semibold text-ink">26th November</span> was an intimate
               celebration with family, but there is one chapter we simply cannot celebrate without you —
               the friends who made our journey so extraordinarily special.
             </p>
@@ -32,12 +32,7 @@ export function Note() {
               the little moments, and the stories we&apos;ll cherish for a lifetime. You haven&apos;t just been friends;
               you&apos;ve been family we found along the way.
             </p>
-            <div className="my-8 rounded-xl border border-gold/30 bg-gold/5 py-4 px-6">
-              <p className="caps text-[0.62rem] text-ink font-semibold tracking-[0.25em]">
-                It&apos;s About Our People · Our Memories · Our Kind of Night
-              </p>
-              <p className="script mt-1 text-2xl text-sepia">And honestly, it wouldn&apos;t be complete without you.</p>
-            </div>
+
           </div>
         </Reveal>
         <Reveal delay={0.3}>

@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { invite } from "@/config/invite";
-import { downloadIcs } from "@/lib/calendar";
 import { directionsUrl } from "@/config/invite";
 
 /**
@@ -10,7 +9,6 @@ import { directionsUrl } from "@/config/invite";
  */
 export function ActionBar() {
   const [visible, setVisible] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [canShare, setCanShare] = useState(false);
   const reduced = useReducedMotion();
 
@@ -56,13 +54,12 @@ export function ActionBar() {
           whileTap={{ scale: 0.95 }}
           onClick={() => {
             tap();
-            downloadIcs();
-            setSaved(true);
-            window.setTimeout(() => setSaved(false), 2500);
+            const el = document.getElementById("rsvp");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
-          className="caps flex min-h-14 flex-1 items-center justify-center rounded-full bg-ink px-3 text-[0.5rem] text-paper"
+          className="caps flex min-h-14 flex-1 items-center justify-center rounded-full bg-ink px-3 text-[0.5rem] text-paper font-semibold"
         >
-          {saved ? "Saved" : "Save date"}
+          RSVP
         </motion.button>
 
         <motion.a
