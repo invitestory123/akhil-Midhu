@@ -32,6 +32,8 @@ export const invite = {
     subtitle: "Vibrant colours, tropical prints & stylish casuals",
     description: "Come dressed for the vibe, bring your wildest energy, and leave your worries behind!",
   },
+  whatsappNumber: "919567471515",
+  whatsappNumberFormatted: "+91 95674 71515",
 } as const;
 
 export const mapsUrl = invite.mapsLink;

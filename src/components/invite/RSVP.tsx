@@ -44,6 +44,37 @@ export function RSVP() {
     }
   }, []);
 
+  // Generate pre-filled WhatsApp message for hosts
+  const getWhatsappUrl = (data: {
+    status: "attending" | "declined";
+    name: string;
+    guestCount: number;
+    phone?: string;
+    note?: string;
+  }) => {
+    const isAttending = data.status === "attending";
+    const guestLine =
+      data.guestCount === 1
+        ? "1 Person (Just me)"
+        : `${data.guestCount} Persons`;
+
+    const msg = isAttending
+      ? `✨ *RSVP for Forever Fest* ✨\n\n` +
+        `Hi ${invite.bride} & ${invite.groom}! 👋\n\n` +
+        `I will be happily attending your celebration on ${invite.dayLine}!\n\n` +
+        `👤 *Guest Name:* ${data.name}\n` +
+        `👥 *Persons Attending:* ${guestLine}\n` +
+        (data.phone ? `📞 *Contact:* ${data.phone}\n` : "") +
+        (data.note ? `💬 *Note:* "${data.note}"\n\n` : "\n") +
+        `Can't wait to celebrate together! 🥂🎉`
+      : `🤍 *RSVP for Forever Fest*\n\n` +
+        `Hi ${invite.bride} & ${invite.groom},\n\n` +
+        `Warmest congratulations on your wedding! Regretfully I won't be able to make it to the party on ${invite.dayLine}, but sending you both lots of love and best wishes! 🥂\n\n` +
+        `👤 *From:* ${data.name}`;
+
+    return `https://wa.me/${invite.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
@@ -65,31 +96,22 @@ export function RSVP() {
 
     setSavedData(data);
     setSubmitted(true);
+
+    // Open WhatsApp directly to send the guest count to +91 95674 71515
+    const targetUrl = getWhatsappUrl(data);
+    if (typeof window !== "undefined") {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   const handleEdit = () => {
     setSubmitted(false);
   };
 
-  // Generate pre-filled WhatsApp message
-  const whatsappUrl = (() => {
-    const isAttending = status === "attending";
-    const msg = isAttending
-      ? `✨ *RSVP for Forever Fest* ✨\n\n` +
-        `Hi ${invite.bride} & ${invite.groom}! 👋\n\n` +
-        `I will be happily attending your celebration on ${invite.dayLine}!\n\n` +
-        `👤 *Name:* ${name}\n` +
-        `👥 *Persons Attending:* ${guestCount}\n` +
-        (phone ? `📞 *Contact:* ${phone}\n` : "") +
-        (note ? `💬 *Note:* "${note}"\n\n` : "\n") +
-        `Can't wait to celebrate together! 🥂🎉`
-      : `🤍 *RSVP for Forever Fest*\n\n` +
-        `Hi ${invite.bride} & ${invite.groom},\n\n` +
-        `Warmest congratulations on your wedding! Regretfully I won't be able to make it to the party on ${invite.dayLine}, but sending you both lots of love and best wishes! 🥂\n\n` +
-        `👤 *From:* ${name}`;
-
-    return `https://wa.me/?text=${encodeURIComponent(msg)}`;
-  })();
+  // Current WhatsApp URL for confirmed state or manual trigger
+  const whatsappUrl = savedData
+    ? getWhatsappUrl(savedData)
+    : getWhatsappUrl({ status, name, guestCount, phone, note });
 
   return (
     <section id="rsvp" className="relative px-6 py-20 sm:py-28 text-center overflow-hidden">
@@ -160,8 +182,8 @@ export function RSVP() {
                       rel="noopener noreferrer"
                       className="caps flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-[#25D366] text-white px-7 text-[0.55rem] font-semibold tracking-widest shadow-md transition-opacity hover:opacity-90 active:scale-98"
                     >
-                      <MessageCircle className="size-4" />
-                      Send Confirmation to Hosts on WhatsApp
+                      <MessageCircle className="size-4 stroke-[2.5]" />
+                      Open WhatsApp Chat ({invite.whatsappNumberFormatted})
                     </a>
 
                     <button
@@ -170,7 +192,7 @@ export function RSVP() {
                       className="caps flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/20 text-ink/80 hover:text-ink px-6 text-[0.52rem] tracking-widest transition-colors"
                     >
                       <RotateCcw className="size-3.5" />
-                      Change RSVP Details
+                      Change RSVP or Guest Count
                     </button>
                   </div>
                 </motion.div>
@@ -341,10 +363,18 @@ export function RSVP() {
                   <motion.button
                     type="submit"
                     whileTap={{ scale: 0.97 }}
-                    className="caps mt-2 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-ink px-8 text-[0.55rem] text-paper font-semibold tracking-[0.25em] shadow-md transition-opacity hover:opacity-90"
+                    className="caps mt-2 flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 text-[0.56rem] font-semibold tracking-[0.2em] shadow-md transition-all active:scale-98"
                   >
-                    Confirm RSVP
+                    <MessageCircle className="size-4 stroke-[2.5]" />
+                    <span>
+                      {status === "attending"
+                        ? `Send RSVP (${guestCount} ${guestCount === 1 ? "Person" : "Persons"}) to WhatsApp`
+                        : "Send Response to WhatsApp"}
+                    </span>
                   </motion.button>
+                  <p className="mt-2 text-center text-[0.55rem] text-sepia/70">
+                    Sends your guest count &amp; response directly to the hosts on WhatsApp ({invite.whatsappNumberFormatted})
+                  </p>
                 </motion.form>
               )}
             </AnimatePresence>

@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { useRef } from "react";
-const footerBg = "https://media.invitestory.in/marigold-bhavan/src/assets/footer-bg.jpg";
+import footerBg from "@/assets/party-bg.jpg";
 import { invite } from "@/config/invite";
 import { useParallax } from "@/hooks/use-parallax";
 import { ScriptNames } from "./Reveal";
 
 export function InviteFooter() {
   const ref = useRef<HTMLElement>(null);
-  // Slower, spring-smoothed drift so the marigold texture glides on touch.
+  // Slower, spring-smoothed drift so the minimal party texture glides on touch.
   const { y } = useParallax(ref, [-70, 40], ["start end", "end end"]);
 
   return (
